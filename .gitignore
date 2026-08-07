@@ -1,2 +1,5 @@
-profiles.yml
-
+.env
+logs/
+target/
+.user.yml
+.DS_Store
