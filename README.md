@@ -61,3 +61,28 @@ Run these from the project root. Since `profiles.yml` isn't in `~/.dbt/`, add `-
 ```
 dbt debug --profiles-dir .
 ```
+
+# Generate documentation
+
+Build and view dbt's interactive docs site, including the full lineage graph and column-level catalog:
+
+```
+dbt docs generate --profiles-dir .
+dbt docs serve --profiles-dir .
+```
+
+This starts a local server (default `http://localhost:8080`) and opens the docs in your browser. Generated files land in `target/` and are gitignored.
+
+# Data lineage
+
+```mermaid
+graph LR
+    stg_artists --> fct_sales
+    stg_albums --> fct_sales
+    stg_tracks --> fct_sales
+    stg_invoices --> fct_sales
+    stg_invoice_lines --> fct_sales
+    fct_sales --> agg_artist_revenue
+    fct_sales --> agg_album_sales
+    fct_sales --> agg_monthly_sales
+```
