@@ -1,0 +1,10 @@
+version: 2
+sources:
+  - name: chinook
+    schema: public
+    tables:
+      - name: artist
+      - name: album
+      - name: track
+      - name: invoice
+      - name: invoice_line
