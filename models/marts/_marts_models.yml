@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: fct_sales
+    columns:
+      - name: invoice_line_id
+        tests:
+          - unique
+          - not_null
+      - name: quantity
+        tests:
+          - non_negative
+      - name: track_unit_price
+        tests:
+          - non_negative
+      - name: sale_unit_price
+        tests:
+          - non_negative
+      - name: total
+        tests:
+          - non_negative
+
+  - name: agg_artist_revenue
+    columns:
+      - name: total_revenue
+        tests:
+          - non_negative
+
+  - name: agg_album_sales
+    columns:
+      - name: total_revenue
+        tests:
+          - non_negative
+      - name: units_sold
+        tests:
+          - non_negative
+
+  - name: agg_monthly_sales
+    columns:
+      - name: total_revenue
+        tests:
+          - non_negative
+      - name: line_items_sold
+        tests:
+          - non_negative
