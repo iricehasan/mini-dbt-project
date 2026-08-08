@@ -2,7 +2,7 @@
 
 select
     album_title,
-    sum(quantity * sale_unit_price) as total_revenue,
+    sum( {{ revenue('quantity', 'sale_unit_price') }}) as total_revenue,
     sum(quantity) as units_sold
 from {{ ref('fct_sales') }}
 group by 1
