@@ -1,0 +1,76 @@
+version: 2
+
+models:
+  - name: stg_artists
+    columns:
+      - name: artist_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_albums
+    columns:
+      - name: album_id
+        tests:
+          - unique
+          - not_null
+
+      - name: artist_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_artists')
+              field: artist_id
+
+  - name: stg_tracks
+    columns:
+      - name: track_id
+        tests:
+          - unique
+          - not_null
+      - name: album_id
+        tests:
+          - relationships:
+              to: ref('stg_albums')
+              field: album_id
+      - name: track_unit_price
+        tests:
+          - non_negative
+      - name: duration_seconds
+        tests:
+          - non_negative
+
+  - name: stg_invoices
+    columns:
+      - name: invoice_id
+        tests:
+          - unique
+          - not_null
+      - name: total
+        tests:
+          - non_negative
+
+  - name: stg_invoice_lines
+    columns:
+      - name: invoice_line_id
+        tests:
+          - unique
+          - not_null
+      - name: track_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_tracks')
+              field: track_id
+      - name: invoice_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_invoices')
+              field: invoice_id
+      - name: sale_unit_price
+        tests:
+          - non_negative
+      - name: quantity
+        tests:
+          - non_negative
